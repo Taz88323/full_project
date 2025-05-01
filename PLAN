@@ -1,0 +1,7 @@
+pull current setups using terraform
+write code for deploying
+use packer to configure those devices
+once able to deploy an existing device, move onto 
+  - creating a github runner
+  - creating a provisioning server for pxe boot
+  - create monitoring grafana/prometheus
