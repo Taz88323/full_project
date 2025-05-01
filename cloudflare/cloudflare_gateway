@@ -1,0 +1,36 @@
+create vm in proxmox name "cloudflare-tunnel"
+https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/create-remote-tunnel/
+
+
+debian
+
+# enter su to elevate (as I set a password at installation, if no password set, sudo is installed by default)
+# bash not installed so 
+ -- apt update
+ -- apt upgrade 
+ -- apt install curl
+
+
+# Add cloudflare gpg key
+sudo mkdir -p --mode=0755 /usr/share/keyrings
+curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null
+
+# Add this repo to your apt repositories
+echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared any main' | sudo tee /etc/apt/sources.list.d/cloudflared.list
+
+# install cloudflared
+sudo apt-get update && sudo apt-get install cloudflared
+
+sudo cloudflared service install [private key]
+
+apt-get openssh-server
+
+installed key and now showing as up in cloudflare
+
+stuck getting device to show, may be being blocked by HA
+added to config
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 127.0.0.1
+    - 192.168.10.32
