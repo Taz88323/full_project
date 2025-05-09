@@ -19,19 +19,7 @@ services:
       - 3000:3000
     networks:
       - localprom
-  homeassistant:
-    container_name: homeassistant
-    image: "ghcr.io/home-assistant/home-assistant:stable"
-    volumes:
-      - /Users/tarot.swift/Documents/Docker/homeassistant:/config
-      - /etc/localtime:/etc/localtime:ro
-      - /run/dbus:/run/dbus:ro
-    ports:
-      - 8123:8123
-    restart: unless-stopped
-    privileged: true
-    networks: 
-    - localprom
+
   cadvisor:
     container_name: cadvisor
     image: gcr.io/cadvisor/cadvisor
