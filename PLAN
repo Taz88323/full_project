@@ -5,3 +5,7 @@ once able to deploy an existing device, move onto
   - creating a github runner
   - creating a provisioning server for pxe boot
   - create monitoring grafana/prometheus
+
+  09/05/25
+
+  - get everything into a working docker compose file

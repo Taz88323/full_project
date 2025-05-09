@@ -15,8 +15,11 @@ services:
       - 9100:9100
   grafana:
     image: grafana/grafana
-    ports:
-      - 3000:3000
+    volumes: 
+      - /home/taz/mnt/NAS/logging/grafana-data:/var/lib/grafana
+      - /home/taz/Documents/full_project/prometheus_exporters/grafana/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+      - /home/taz/Documents/full_project/prometheus_exporters/grafana.dashboard.json:/var/lib/grafana/dashboards/dashboard.json
+      - /home/taz/Documents/full_project/prometheus_exporters/grafana/default.yaml:/etc/grafana/provisioning/dashboards/default.yaml
     networks:
       - localprom
 
@@ -53,4 +56,6 @@ networks:
   localprom:
     driver: bridge
 
+volumes:
+  grafana-data:
     
