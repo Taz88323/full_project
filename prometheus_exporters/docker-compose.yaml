@@ -4,7 +4,7 @@ services:
     ports:
       - 9090:9090
     volumes:
-      - /Users/tarot.swift/Documents/Docker/prometheus:/etc/prometheus
+      - /home/taz/Documents/full_project/prometheus_exporters/prometheus:/etc/prometheus
     networks:
       - localprom
   node-exporter:
@@ -20,20 +20,7 @@ services:
     networks:
       - localprom
 
-  cadvisor:
-    container_name: cadvisor
-    image: gcr.io/cadvisor/cadvisor
-   
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:ro
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    ports:
-      - 8080:8080
-    networks:
-    - localprom
+
 
   nginx:
     container_name: nginx
