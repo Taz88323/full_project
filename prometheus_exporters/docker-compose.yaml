@@ -20,7 +20,22 @@ services:
     networks:
       - localprom
 
-
+  cadvisor:
+    container_name: cadvisor
+    image: gcr.io/cadvisor/cadvisor
+    volumes: 
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    privileged: true
+    devices: 
+      - dev/kmsg
+    ports:
+      - 8080:8080
+    networks:
+      - localprom
 
   nginx:
     container_name: nginx
