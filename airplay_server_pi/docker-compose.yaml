@@ -1,0 +1,13 @@
+services:
+  shairport-sync:
+    image: mikebrady/shairport-sync:latest
+    network_mode: host
+    restart: unless-stopped
+    devices:
+      - "/dev/snd"
+    volumes: 
+      - //wsl.localhost/docker-desktop/etc/shairport-sync.conf:/etc/shairport-sync.conf  
+    logging:
+      options:
+        max-size: "200k"
+        max-file: "10"
