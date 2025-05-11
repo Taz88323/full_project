@@ -1,6 +1,0 @@
-Opens in a browser but doesn't open in the app, which looks to be SSL related, so will need to create a certificate
-
-$ openssl pkcs12 -export -out cfcert.pfx -inkey private.key -in cert.pem
-Could not open file or uri for loading private key from -inkey file from private.key: No such file or directory
-
-created certificate, which seems to have introduced more problems, can't access on browser or app
