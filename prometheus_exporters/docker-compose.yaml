@@ -4,7 +4,7 @@ services:
     ports:
       - 9090:9090
     volumes:
-      - /prometheus_exporters/prometheus:/etc/prometheus
+      - /prometheus_exporters/prometheus/:/etc/prometheus
     networks:
       - localprom
   node-exporter:
@@ -41,11 +41,20 @@ services:
       - 8080:8080
     networks:
       - localprom
+
+  alertmanager:
+    container_name: alertmanager
+    image: prom/alertmanager:latest
+    restart: unless-stopped
+    ports:
+      - "9093:9093"
+    volumes:
+      - "./alertmanager:/config"
+      - alertmanager-data:/data
+    command: --config.file=/config/alertmanage.yaml --log.level=debug
   
 networks:
   localprom:
     driver: bridge
 
 volumes:
-  grafana-data:
-    
