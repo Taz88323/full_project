@@ -18,7 +18,6 @@ services:
     ports: 
       - 3000:3000
     volumes: 
-      - /home/taz/mnt/NAS/logging/grafana-data:/var/lib/grafana
       - /prometheus_exporters/grafana/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
       - /prometheus_exporters/grafana.dashboard.json:/var/lib/grafana/dashboards/dashboard.json
       - /prometheus_exporters/grafana/default.yaml:/etc/grafana/provisioning/dashboards/default.yaml
