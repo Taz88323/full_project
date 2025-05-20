@@ -1,0 +1,59 @@
+services:
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - /prometheus_exporters/prometheus/:/etc/prometheus
+    networks:
+      - localprom
+  node-exporter:
+    image: prom/node-exporter
+    networks:
+      - localprom
+    ports:
+      - 9100:9100
+  grafana:
+    image: grafana/grafana
+    ports: 
+      - 3000:3000
+    volumes: 
+      - /prometheus_exporters/grafana/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+      - /prometheus_exporters/grafana.dashboard.json:/var/lib/grafana/dashboards/dashboard.json
+      - /prometheus_exporters/grafana/default.yaml:/etc/grafana/provisioning/dashboards/default.yaml
+    networks:
+      - localprom
+
+  cadvisor:
+    container_name: cadvisor
+    image: gcr.io/cadvisor/cadvisor
+    volumes: 
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    privileged: true
+    devices: 
+      - dev/kmsg
+    ports:
+      - 8080:8080
+    networks:
+      - localprom
+
+  alertmanager:
+    container_name: alertmanager
+    image: prom/alertmanager:latest
+    restart: unless-stopped
+    ports:
+      - "9093:9093"
+    volumes:
+      - "./alertmanager:/config"
+      - alertmanager-data:/data
+    command: --config.file=/config/alertmanage.yaml --log.level=debug
+  
+networks:
+  localprom:
+    driver: bridge
+
+volumes:
