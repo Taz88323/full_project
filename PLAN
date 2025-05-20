@@ -9,3 +9,10 @@ once able to deploy an existing device, move onto
   09/05/25
 
   - get everything into a working docker compose file
+
+
+20/5/25
+
+adding prometheus exporter to proxmox
+
+https://github.com/prometheus-pve/prometheus-pve-exporter
